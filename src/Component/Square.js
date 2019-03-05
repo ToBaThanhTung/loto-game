@@ -1,43 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-
-const styles = {
-  card: {
-    width: 75,
-    height: 75,
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-};
-
-// const Square = (props) => {
-//   const { classes, num, open, chosen } = props;
-
-//   return (
-//     <Grid item xs={1}>
-//       {open ?
-//         <Button
-//           variant='raised'
-//           className={classes.card}
-//         >
-//           {num}
-//         </Button>
-//         : <Button variant='raised' disabled className={classes.card}></Button>
-//       }
-//     </Grid>
-//   );
-// }
+import waterMelon from '../assets/watermelon.svg';
+import Icon from '@material-ui/core/Icon';
+const styles = theme => ({
+  square: {
+    width: '35px',
+    height: '45px',
+    minWidth: 'auto',
+  }
+  
+});
 
 class Square extends Component {
 
@@ -49,21 +22,33 @@ class Square extends Component {
   render() {
     const { num, open, choosen, col, row } = this.props.square;
     const { classes, onChoosen } = this.props;
+    let marginFlag;
+    if(row === 2 || row === 5) {
+      marginFlag = '16px';
+    }
+
+    //console.log(this.props);
     
+
     return (
-      <Grid item xs={1}>
+      <div style={{margin: '2px', marginBottom: marginFlag}}>
         {open ?
-          <Button
-            variant='contained'
-            color={choosen ? 'secondary' : 'inherit'}
-            className={classes.card}
-            onClick={() => onChoosen(col, row)}
-          >
-            {num}
-          </Button>
-          : <Button variant='contained' disabled className={classes.card}></Button>
+          <div className={classes.square}>
+            {choosen ?
+              <img src={`${waterMelon}`} /> :
+              <Button
+                variant='contained'
+                color='inherit'
+                className={classes.square}
+                onClick={() => onChoosen(col, row)}
+               
+              >
+                {num}
+              </Button>}
+          </div>
+          : <Button variant='contained' disabled className={classes.square}>-</Button>
         }
-      </Grid>
+      </div>
     )
   }
 

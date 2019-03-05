@@ -18,7 +18,7 @@ const boardData = () => {
 
   shuffle(data);
   
-  const col = 9, row = 9;
+  const col = 9, row = 8;
   let board = [];
   for (let i = 0; i < col; i++) {
     board[i] = [];
